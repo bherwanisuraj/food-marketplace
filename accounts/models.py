@@ -45,7 +45,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     CUSTOMER = 0
-    RESTAURANT = 0
+    RESTAURANT = 1
 
     ROLES = (
         (CUSTOMER, 'Customer'),

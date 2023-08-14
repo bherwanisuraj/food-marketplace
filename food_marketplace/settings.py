@@ -56,7 +56,8 @@ ROOT_URLCONF = 'food_marketplace.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates',
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
