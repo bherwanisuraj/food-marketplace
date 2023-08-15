@@ -76,6 +76,18 @@
                               </div>
                             </div>
                           </div>
+                          <ul class="errorlist">
+                            {% for field in form  %}
+                           {% if field.errors %}
+                              {% for error in field.errors  %}
+                                <li>{{error}}</li>
+                              {% endfor %}
+                            {% endif %}
+                          {% endfor %}
+                          <li>
+                            {{form.non_field_errors}}
+                          </li>
+                          </ul>
                         </div>
                       </li>
                     </ul>          
