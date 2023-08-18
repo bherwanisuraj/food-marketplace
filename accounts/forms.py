@@ -1,5 +1,7 @@
 from typing import Any, Dict
 from django import forms
+
+from vendor.models import Vendor
 from .models import User
 
 class UserForm(forms.ModelForm):
@@ -16,3 +18,10 @@ class UserForm(forms.ModelForm):
 
         if password!=confirm_password:
             raise forms.ValidationError('Password does not match.')
+        
+
+class VendorForm(forms.ModelForm):
+    class Meta: 
+        model = Vendor
+        fields = ['vendor_name', 'vendor_license']
+        
