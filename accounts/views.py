@@ -75,7 +75,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'Login Succesfull!')
-            return render(request, 'accounts/user-dashboard.html')
+            return redirect('dashboard')
 
         else:
             messages.error(request, 'Invalid credentials')
@@ -87,9 +87,8 @@ def login(request):
 
 
 def logout(request):
-    # if request.method == 'POST':
-    #     if form
-
+    auth.logout(request)
+    messages.info(request, 'You are not logged out')
     return render(request, 'accounts/user-login.html')
 
 
@@ -97,4 +96,4 @@ def dashboard(request):
     # if request.method == 'POST':
     #     if form
 
-    return render(request, 'accounts/user-login.html')
+    return render(request, 'accounts/user-dashboard.html')
