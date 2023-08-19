@@ -5,7 +5,11 @@ from django.contrib import messages, auth
 
 def registerUser(request):
 
-    if request.method == 'POST':
+    if request.user.is_authenticated:
+        messages.warning(request, 'You are already logged-in')
+        return redirect('dashboard')
+
+    elif request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
             # user = form.save(commit=False)
@@ -32,7 +36,11 @@ def registerUser(request):
 
 def registerVendor(request):
 
-    if request.method == 'POST':
+    if request.user.is_authenticated:
+        messages.warning(request, 'You are already logged-in')
+        return redirect('dashboard')
+
+    elif request.method == 'POST':
         form = UserForm(request.POST)
         vendor_form = VendorForm(request.POST, request.FILES)
 
@@ -67,7 +75,12 @@ def registerVendor(request):
 
 
 def login(request):
-    if request.method == 'POST':
+
+    if request.user.is_authenticated:
+        messages.warning(request, 'You are already logged-in')
+        return redirect('dashboard')
+
+    elif request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
 
