@@ -3,6 +3,7 @@ from .forms import UserForm, VendorForm
 from .models import User, UserProfile
 from django.contrib import messages, auth
 from .utils import detectUser
+from django.contrib.auth.decorators import login_required
 
 def registerUser(request):
 
@@ -99,21 +100,23 @@ def login(request):
 
     return render(request, 'accounts/user-login.html')
 
-
+@login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     messages.info(request, 'You are not logged out')
     return render(request, 'accounts/user-login.html')
 
+@login_required(login_url='login')
 def myAccount(request):
     user = request.user
     url = detectUser(user)
     
     return redirect(url)
 
-
+@login_required(login_url='login')
 def customerDashboard(request):    
     return render(request, 'accounts/customer-dashboard.html')
 
+@login_required(login_url='login')
 def vendorDashboard(request):    
     return render(request, 'accounts/vendor-dashboard.html')
