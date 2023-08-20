@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserForm, VendorForm
 from .models import User, UserProfile
 from django.contrib import messages, auth
+from .utils import detectUser
 
 def registerUser(request):
 
@@ -78,7 +79,7 @@ def login(request):
 
     if request.user.is_authenticated:
         messages.warning(request, 'You are already logged-in')
-        return redirect('dashboard')
+        return redirect('my-account')
 
     elif request.method == 'POST':
         email = request.POST['email']
@@ -88,7 +89,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'Login Succesfull!')
-            return redirect('dashboard')
+            return redirect('my-account')
 
         else:
             messages.error(request, 'Invalid credentials')
@@ -104,9 +105,15 @@ def logout(request):
     messages.info(request, 'You are not logged out')
     return render(request, 'accounts/user-login.html')
 
+def myAccount(request):
+    user = request.user
+    url = detectUser(user)
+    
+    return redirect(url)
 
-def dashboard(request):
-    # if request.method == 'POST':
-    #     if form
 
-    return render(request, 'accounts/user-dashboard.html')
+def customerDashboard(request):    
+    return render(request, 'accounts/customer-dashboard.html')
+
+def vendorDashboard(request):    
+    return render(request, 'accounts/vendor-dashboard.html')

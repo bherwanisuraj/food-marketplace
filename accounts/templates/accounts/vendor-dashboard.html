@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Vendor Dashboard</h1>
+    <h2>
+        {{ user.username}}
+    </h2>
+  {% include 'includes/alert.html' %}
+{% endblock %}
