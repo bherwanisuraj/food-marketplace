@@ -1,3 +1,10 @@
+from django.core.mail import EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import default_token_generator
+
 def detectUser(user):
     if user.role == 0:
         url = 'customer-dashboard'
@@ -9,3 +16,18 @@ def detectUser(user):
         url = '/admin'
 
     return url
+
+def send_verification_email(request, user):
+    current_site = get_current_site(request)
+    email = user.email
+    subject = 'Please click the below link to activate your account'
+
+    message = render_to_string('accounts/emails/account_verification_email.html', {
+        'current_site': current_site,
+        'email': email,
+        'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': default_token_generator.make_token(user),
+    })
+
+    mail = EmailMessage(subject, message, to=[email])
+    mail.send()

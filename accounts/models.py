@@ -60,10 +60,10 @@ class User(AbstractBaseUser):
     role = models.PositiveSmallIntegerField(choices=ROLES, blank=True, null=True)
 
     #required fields
-    date_joined = models.DateField(auto_now_add=True)
-    last_login = models.DateField(auto_now_add=True)
-    created_date = models.DateField(auto_now_add=True)
-    date_modified = models.DateField(auto_now=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    last_login = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)

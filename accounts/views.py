@@ -5,6 +5,7 @@ from django.contrib import messages, auth
 from .utils import detectUser
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
+from .utils import send_verification_email
 
 def check_role_customer(user):
     if user.role == 0:
@@ -38,6 +39,7 @@ def registerUser(request):
             user.role = User.CUSTOMER
             user.phone = phone
             user.save()
+            send_verification_email(request, user)
             messages.success(request, 'Congratulations! Your account has been registered.')
             return redirect('register-user')        
     else:
@@ -75,6 +77,7 @@ def registerVendor(request):
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()
+            send_verification_email(request, user)
             messages.success(request, 'Your restaurant has been created.')
 
     else:
@@ -87,6 +90,9 @@ def registerVendor(request):
     }
 
     return render(request, 'accounts/register-vendor.html', context)
+
+def activate(request, uidb64, token):
+    return True
 
 
 def login(request):
