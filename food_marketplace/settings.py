@@ -145,9 +145,4 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', cast=str)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
 
-print(EMAIL_HOST)
-print(EMAIL_PORT)
-print(EMAIL_HOST_USER)
-print(EMAIL_HOST_PASSWORD)
-print(EMAIL_USE_TLS)
 
