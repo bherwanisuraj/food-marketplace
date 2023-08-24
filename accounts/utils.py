@@ -18,29 +18,13 @@ def detectUser(user):
 
     return url
 
-def send_verification_email(request, user):
+def sendMail(request, user, subject, template):
     current_site = get_current_site(request)
     from_email = settings.DEFAULT_FROM_EMAIL
     email = user.email
-    subject = 'Please click the below link to activate your account'
+    subject = subject
 
-    message = render_to_string('accounts/emails/account_verification_email.html', {
-        'current_site': current_site,
-        'email': email,
-        'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': default_token_generator.make_token(user),
-    })
-
-    mail = EmailMessage(subject, message, from_email, to=[email])
-    mail.send()
-
-def send_password_reset_mail(request, user):
-    current_site = get_current_site(request)
-    from_email = settings.DEFAULT_FROM_EMAIL
-    email = user.email
-    subject = 'Password rest link'
-
-    message = render_to_string('accounts/emails/password_reset_mail.html', {
+    message = render_to_string(f'accounts/emails/{template}.html', {
         'current_site': current_site,
         'email': email,
         'uid' : urlsafe_base64_encode(force_bytes(user.pk)),

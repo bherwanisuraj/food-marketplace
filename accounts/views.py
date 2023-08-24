@@ -5,7 +5,7 @@ from django.contrib import messages, auth
 from .utils import detectUser
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
-from .utils import send_verification_email, send_password_reset_mail
+from .utils import sendMail
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 
@@ -41,7 +41,7 @@ def registerUser(request):
             user.role = User.CUSTOMER
             user.phone = phone
             user.save()
-            send_verification_email(request, user)
+            sendMail(request, user, "Activation link has been sent to your email", "account-verification-email")
             messages.success(request, 'Congratulations! Your account has been registered.')
             return redirect('register-user')        
     else:
@@ -79,7 +79,7 @@ def registerVendor(request):
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()
-            send_verification_email(request, user)
+            sendMail(request, user, "Activation link has been sent to your email", "account-verification-email")
             messages.success(request, 'Your restaurant has been created.')
 
     else:
@@ -166,10 +166,13 @@ def forgotPassword(request):
         email = request.POST['email']
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email__exact=email)
-            send_password_reset_mail(request, user)
+            sendMail(request, user, "Password reset link has been sent to your email", "password-reset-mail")
             messages.success(request, 'Password reset link has been sent to your email address.')
 
         else:
             messages.error(request, 'Account associated with the email address does not exist.')
 
     return render(request, 'accounts/forgot-password.html')
+
+def resetPasswordValidate(request, uidb, token):
+    pass
