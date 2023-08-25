@@ -5,6 +5,8 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
+from django.utils.http import urlsafe_base64_decode
+from .models import User, UserProfile
 
 def detectUser(user):
     if user.role == 0:
@@ -33,3 +35,13 @@ def sendMail(request, user, subject, template):
 
     mail = EmailMessage(subject, message, from_email, to=[email])
     mail.send()
+
+def uidAndTokenChecker(uidb64):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User._default_manager.get(pk=uid)
+
+    except(TypeError, User.DoesNotExist, OverflowError, ValueError):
+        user = None
+
+    return user, uid
