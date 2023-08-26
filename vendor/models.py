@@ -14,3 +14,18 @@ class Vendor(models.Model):
 
     def __str__(self):
         return self.vendor_name
+    
+
+    def save(self, *agrs, **kwargs):
+        if self.pk is not None:
+            vendor = Vendor.objects.get(pk = self.pk)
+            if vendor.is_approved != self.is_approved:
+                if self.is_approved is True:
+                    send_approval_mail()
+
+                else:
+                    send_approval_mail()
+
+
+        return super(Vendor, self).save(*args, **kwargs)
+    
