@@ -9,17 +9,7 @@ from .utils import sendMail
 
 from django.contrib.auth.tokens import default_token_generator
 
-def check_role_customer(user):
-    if user.role == 0:
-        return True
-    else:
-        raise PermissionDenied
-    
-def check_role_vendor(user):
-    if user.role == 1:
-        return True
-    else:
-        raise PermissionDenied
+
 
 def registerUser(request):
 
@@ -145,16 +135,8 @@ def myAccount(request):
     return redirect(url)
 
 
-@login_required(login_url='login')
-@user_passes_test(check_role_customer)
-def customerDashboard(request):    
-    return render(request, 'accounts/customer-dashboard.html')
 
 
-@login_required(login_url='login')
-@user_passes_test(check_role_vendor)
-def vendorDashboard(request):    
-    return render(request, 'accounts/vendor-dashboard.html')
 
 def forgotPassword(request):
     if request.method == 'POST':
