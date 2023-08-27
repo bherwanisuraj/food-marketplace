@@ -2,7 +2,7 @@
 
 Hi {{ user.name}},
 
-Welcome to Food Online. Please click the below link to activate your account and enjoy delicious dishes.
+Welcome to Food Online. {{subject}}
 http://{{current_site}}{% url 'activate' uidb64=uid token=token %}
 
 {% endautoescape %}

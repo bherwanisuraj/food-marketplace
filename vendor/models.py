@@ -1,6 +1,7 @@
 from django.db import models
 
 from accounts.models import User, UserProfile
+from accounts.utils import sendMail
 
 
 class Vendor(models.Model):
@@ -21,11 +22,8 @@ class Vendor(models.Model):
             vendor = Vendor.objects.get(pk = self.pk)
             if vendor.is_approved != self.is_approved:
                 if self.is_approved is True:
-                    send_approval_mail()
-
+                    sendMail(None, self.vendor, "Congratulation! Your Restaurant has been approved.", "vendor-approval", False, self.is_approved)
                 else:
-                    send_approval_mail()
+                    sendMail(None, self.vendor, "We're Sorry! Your Restaurant application was declined.", "vendor-approval", False, self.is_approved)
 
-
-        return super(Vendor, self).save(*args, **kwargs)
-    
+        return super(Vendor, self).save(**kwargs)

@@ -41,7 +41,7 @@ def registerUser(request):
             user.role = User.CUSTOMER
             user.phone = phone
             user.save()
-            sendMail(request, user, "Activation link has been sent to your email", "account-verification-email")
+            sendMail(request, user, "Please click on the below link to activate your account.", "account-verification-email", True, False)
             messages.success(request, 'Congratulations! Your account has been registered.')
             return redirect('register-user')        
     else:
@@ -79,7 +79,7 @@ def registerVendor(request):
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()
-            sendMail(request, user, "Activation link has been sent to your email", "account-verification-email")
+            sendMail(request, user, "Please click on the below link to activate your account.", "account-verification-email", True, False)
             messages.success(request, 'Your restaurant has been created.')
 
     else:
@@ -161,7 +161,7 @@ def forgotPassword(request):
         email = request.POST['email']
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email__exact=email)
-            sendMail(request, user, "Password reset link has been sent to your email", "password-reset-mail")
+            sendMail(request, user, "Please click on the below link to reset your password", "password-reset-mail", True, False)
             messages.success(request, 'Password reset link has been sent to your email address.')
 
         else:

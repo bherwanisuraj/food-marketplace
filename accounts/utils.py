@@ -20,18 +20,27 @@ def detectUser(user):
 
     return url
 
-def sendMail(request, user, subject, template):
-    current_site = get_current_site(request)
+def sendMail(request, user: User, subject: str, template: str, has_link: bool, is_approved:bool):
+    
     from_email = settings.DEFAULT_FROM_EMAIL
     email = user.email
     subject = subject
 
-    message = render_to_string(f'accounts/emails/{template}.html', {
-        'current_site': current_site,
-        'email': email,
-        'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': default_token_generator.make_token(user),
-    })
+    if has_link:
+        current_site = get_current_site(request)
+        message = render_to_string(f'accounts/emails/{template}.html', {
+            'current_site': current_site,
+            'email': email,
+            'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': default_token_generator.make_token(user),
+        })
+
+    else:
+        message = render_to_string(f'accounts/emails/{template}.html', {
+            'user': user,
+            'email': email,
+            'is_approved' : is_approved,
+        })
 
     mail = EmailMessage(subject, message, from_email, to=[email])
     mail.send()
