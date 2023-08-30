@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
+from .models import Vendor
 
 
 def check_role_vendor(user):
@@ -11,5 +12,10 @@ def check_role_vendor(user):
 
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
-def vendorDashboard(request):    
-    return render(request, 'vendor/vendor-dashboard.html')
+def vendorDashboard(request):
+    print("Request******************************************************************************************************************* ", request.user)
+    vendor = Vendor.objects.get(vendor=request.user)
+    context = {
+        'vendor':vendor,
+    }
+    return render(request, 'vendor/vendor-dashboard.html', context)

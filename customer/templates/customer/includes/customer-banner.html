@@ -1,5 +1,5 @@
 {% load static %}
-<div class="page-section restaurant-detail-image-section" style=" background: url({% static 'extra-images/banner-img.jpg' %}) no-repeat scroll 0 0 / cover;">
+<div class="page-section restaurant-detail-image-section" style=" background: url({{ customer.cover_picture.url }}) no-repeat scroll 0 0 / cover;">
     <!-- Container Start -->
     <div class="container">
       <!-- Row Start -->
@@ -10,14 +10,14 @@
             <div class="company-info">
               <div class="img-holder">
                 <figure>
-                  <img src="{% static 'extra-images/main-logo.png' %}" alt="">
+                  <img src="{{ customer.profile_picture.url }}" alt="">
                 </figure>
               </div>
               <div class="text-holder">
-                <span class="restaurant-title">Buyer Demo</span>
+                <span class="restaurant-title">{{ customer.user.first_name }} {{ customer.user.last_name }}</span>
                 <ul class="user-info-contact">
-                  <li class="cell"><i class="icon-phone"></i><a href="tel:0123456789">012 3456 789</a></li>
-                  <li class="email"><i class="icon-mail5"></i><a href="mailto:dum4@chimpgroup.com">dum4@chimpgroup.com</a></li>
+                  <li class="cell"><i class="icon-phone"></i><a href="tel:0123456789">{{ customer.user.phone }}</a></li>
+                  <li class="email"><i class="icon-mail5"></i><a href="mailto:dum4@chimpgroup.com">{{ customer.user.email }}</a></li>
                 </ul>
               </div>
             </div>
