@@ -13,9 +13,15 @@ def check_role_vendor(user):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def vendorDashboard(request):
-    print("Request******************************************************************************************************************* ", request.user)
-    vendor = Vendor.objects.get(vendor=request.user)
-    context = {
-        'vendor':vendor,
-    }
-    return render(request, 'vendor/vendor-dashboard.html', context)
+    # vendor = Vendor.objects.get(vendor=request.user)
+    # context = {
+    #     'vendor':vendor,
+    # }
+    return render(request, 'vendor/vendor-dashboard.html')
+
+@login_required(login_url='login')
+@user_passes_test(check_role_vendor)
+def myRestaurant(request):
+    return render(request, 'vendor/my-restaurant.html')
+
+
