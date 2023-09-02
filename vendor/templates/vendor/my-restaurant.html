@@ -16,7 +16,9 @@
               <div class="user-holder">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <h2>Manage Your Restaurant</h2>
-                  <form action="restaurant-location.html">
+                  <form action="{% url 'my-restaurant' %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+
 										<div class="form-fields-set">
 											<ul>
 												<li>
