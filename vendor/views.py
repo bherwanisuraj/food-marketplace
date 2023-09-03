@@ -25,3 +25,5 @@ def myRestaurant(request):
     return render(request, 'vendor/my-restaurant.html')
 
 
+
+
