@@ -32,6 +32,8 @@ def myRestaurant(request):
     context = {
         'vendor': vendor_form,
         'profile': vendor_profile_form,
+        'userprofile': user_profile,
+        'vendorinstance': vendor_instance,
     }
     return render(request, 'vendor/my-restaurant.html', context)
 
