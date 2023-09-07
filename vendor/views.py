@@ -58,6 +58,3 @@ def myRestaurant(request):
         'vendorinstance': vendor_instance,
     }
     return render(request, 'vendor/my-restaurant.html', context)
-
-
-
