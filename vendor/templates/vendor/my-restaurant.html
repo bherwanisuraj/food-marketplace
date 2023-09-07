@@ -39,7 +39,7 @@
 																<div class="text-holder">
 																	<label>Update Logo</label>
 																	<div class="upload-gallery">
-																		{{ profile.profile_picture }}
+																		{{ profileform.profile_picture }}
 																	</div>
 																</div>
 															</div>
@@ -60,7 +60,7 @@
 																<div class="text-holder">
 																	<label>Update Cover Photo</label>
 																	<div class="upload-gallery">
-																		{{ profile.cover_picture }}
+																		{{ profileform.cover_picture }}
 																	</div>
 																	
 																</div>
@@ -82,7 +82,7 @@
 																<div class="text-holder">
 																	<label>Update License</label>
 																	<div class="upload-gallery">
-																		{{ vendor.vendor_license }}
+																		{{ vendorform.vendor_license }}
 																	</div>
 																	
 																</div>
@@ -90,50 +90,56 @@
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															<div class="field-holder">
+																<label>Restaurant Name*</label>
+																{{ vendorform.vendor_name }}
+															</div>
+														</div>
+														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+															<div class="field-holder">
 																<label>Address line 1*</label>
-																{{ profile.address_line_1 }}
+																{{ profileform.address_line_1 }}
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															<div class="field-holder">
 																<label>Address Line 2</label>
-																{{ profile.address_line_2 }}
+																{{ profileform.address_line_2 }}
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															<div class="field-holder">
 																<label>City*</label>
-																{{ profile.city }}
+																{{ profileform.city }}
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															<div class="field-holder">
 																<label>State*</label>
-																{{ profile.state }}
+																{{ profileform.state }}
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															<div class="field-holder">
 																<label>Country*</label>
-																{{ profile.country }}
+																{{ profileform.country }}
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															<div class="field-holder">
 																<label>Pincode*</label>
-																{{ profile.pincode }}
+																{{ profileform.pincode }}
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															<div class="field-holder">
 																<label>Longitude*</label>
-																{{ profile.longitude }}
+																{{ profileform.longitude }}
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															<div class="field-holder">
 																<label>Latitude*</label>
-																{{ profile.latitude }}
+																{{ profileform.latitude }}
 															</div>
 														</div>
 													</div>

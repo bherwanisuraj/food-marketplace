@@ -116,9 +116,6 @@ def login(request):
         else:
             messages.error(request, 'Invalid credentials')
 
-    else:
-        print("error")
-
     return render(request, 'accounts/user-login.html')
 
 @login_required(login_url='login')
