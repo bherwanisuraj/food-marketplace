@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 from .models import Vendor
@@ -46,11 +46,13 @@ def myRestaurant(request):
             vendor_form.save()
             profile_form.save()
             messages.success(request, "Restaurant Updated!")
+            return redirect('my-restaurant')
         else:
-            messages.error(request, "Something went wrong!")
-    
-    profile_form = VendorProfileForm(instance=user_profile)
-    vendor_form = VendorForm(instance=vendor_instance)
+            pass
+
+    else:    
+        profile_form = VendorProfileForm(instance=user_profile)
+        vendor_form = VendorForm(instance=vendor_instance)
     context = {
         'vendorform': vendor_form,
         'profileform': profile_form,
