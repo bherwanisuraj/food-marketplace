@@ -2,7 +2,16 @@ from .models import Vendor
 from django import forms
 from accounts.models import UserProfile
 
-class VendorProfileForm(forms.ModelForm):    
+class VendorProfileForm(forms.ModelForm):   
+    # latitude = forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    # longitude = forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
+
     class Meta:
         model = UserProfile
         fields = ["profile_picture", "cover_picture", "address_line_1", "address_line_2", "city", "state", "country", "pincode", "longitude", "latitude"]
+
+    def __init__(self, *args, **kwargs):
+        super(VendorProfileForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            if field == 'longitude' or field == 'latitude':
+                self.fields[field].widget.attrs['readonly'] = 'readonly'
