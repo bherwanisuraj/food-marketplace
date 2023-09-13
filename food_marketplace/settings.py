@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'vendor.context_processors.get_vendor',
+                'accounts.context_processors.get_profile',
             ],
         },
     },

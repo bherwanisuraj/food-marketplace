@@ -56,7 +56,11 @@ def myRestaurant(request):
     context = {
         'vendorform': vendor_form,
         'profileform': profile_form,
-        'userprofile': user_profile,
-        'vendorinstance': vendor_instance,
+        # 'userprofile': user_profile,
+        # 'vendorinstance': vendor_instance,
     }
     return render(request, 'vendor/my-restaurant.html', context)
+
+
+def menuBuilder(request):
+    return render(request, 'vendor/menu-builder.html')
