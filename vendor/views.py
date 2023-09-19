@@ -22,19 +22,10 @@ def vendorDashboard(request):
     #     'vendor':vendor,
     # }
     return render(request, 'vendor/vendor-dashboard.html')
-
+    
 
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
-
-def user_passes_test(func):
-
-    def inner():
-        pass
-
-    return func()
-    
-
 def myRestaurant(request):
     vendor_instance = get_object_or_404(Vendor, vendor=request.user)
     user_profile = get_object_or_404(UserProfile, user = request.user)
@@ -62,5 +53,7 @@ def myRestaurant(request):
     return render(request, 'vendor/my-restaurant.html', context)
 
 
+@login_required(login_url='login')
+@user_passes_test(check_role_vendor)
 def menuBuilder(request):
     return render(request, 'vendor/menu-builder.html')
