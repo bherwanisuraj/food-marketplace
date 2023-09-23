@@ -6,7 +6,7 @@ from accounts.models import UserProfile
 from accounts.forms import VendorForm
 from .forms import VendorProfileForm
 from django.contrib import messages
-
+from menu.models import Category
 
 def check_role_vendor(user):
     if user.role == 1:
@@ -56,4 +56,9 @@ def myRestaurant(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def menuBuilder(request):
-    return render(request, 'vendor/menu-builder.html')
+    vendor = Vendor.objects.get(vendor=request.user)
+    categories = Category.objects.filter(vendor=vendor)
+    context = {
+        'categories' : categories,
+    }
+    return render(request, 'vendor/menu-builder.html', context)

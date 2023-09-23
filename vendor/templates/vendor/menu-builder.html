@@ -25,13 +25,15 @@
                     <caption>List of users</caption>
                     <tbody>
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
+                        {% for cat in categories  %}
+                        <td scope="row">{{ forloop.counter }}</td>
+                        <td><a href="#">{{ cat }}</a></td>
                         <td>
                           <button type="button" class="btn btn-info">Edit</button>
                           <button type="button" class="btn btn-danger">Delete</button>
                         </td>
                       </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                   
